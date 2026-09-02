@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Crissyy Crispy — Imported Snacks</title>
+<meta name="description" content="Crissyy Crispy — imported snacks, ordered straight to WhatsApp." />
+<link rel="icon" href="assets/logo.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
+<style>
+
+  :root {
+    --cream: #fff8ec;
+    --cream-deep: #f7e9cf;
+    --paper: #fffdf9;
+    --orange: #f2762e;
+    --orange-deep: #d95f1b;
+    --orange-tint: #fde6d5;
+    --blue: #1c5b96;
+    --blue-deep: #0f3a63;
+    --blue-tint: #dfeaf4;
+    --navy: #16213a;
+    --ink-soft: #4a5570;
+    --ink-faint: #8992a8;
+    --gold: #ffc94a;
+    --line: #ecdfc6;
+    --line-strong: #ddc99f;
+    --radius-xl: 32px;
+    --radius-lg: 24px;
+    --radius-md: 16px;
+    --shadow-card: 0 2px 0 rgba(22,33,58,0.04), 0 22px 40px -22px rgba(22,33,58,0.35);
+    --shadow-btn-orange: 0 6px 0 var(--orange-deep);
+    --shadow-btn-blue: 0 6px 0 var(--blue-deep);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background:
+      radial-gradient(circle at 8% 4%, rgba(242,118,46,0.07), transparent 40%),
+      radial-gradient(circle at 92% 18%, rgba(28,91,150,0.06), transparent 38%),
+      var(--cream);
+    color: var(--navy);
+    font-family: "Nunito Sans", "Segoe UI", sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, .display {
+    font-family: "Baloo 2", "Nunito Sans", sans-serif;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 0;
+  }
+
+  a { color: inherit; }
+  img { display: block; max-width: 100%; }
+
+  .wrap {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* ---------- Header ---------- */
+
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: rgba(255, 248, 236, 0.88);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .site-header .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+
+  .brand img { height: 54px; width: auto; }
+
+  .header-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .header-links a {
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+  }
+
+  .header-links a:hover { color: var(--orange-deep); }
+
+  .cart-button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--blue);
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    padding: 12px 22px;
+    font-family: "Baloo 2", sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow-btn-blue);
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+  }
+
+  .cart-button:hover { transform: translateY(-1px); }
+  .cart-button:active { transform: translateY(4px); box-shadow: 0 2px 0 var(--blue-deep); }
+
+  .cart-count {
+    background: var(--gold);
+    color: var(--navy);
+    border-radius: 999px;
+    min-width: 24px;
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 800;
+    padding: 0 6px;
+  }
+
+  /* ---------- Hero ---------- */
+
+  .hero { position: relative; padding: 76px 0 56px; overflow: hidden; }
+
+  .hero .wrap {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    align-items: center;
+    gap: 56px;
+  }
+
+  .hero-eyebrow-banner {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--paper);
+    border: 1px solid var(--line-strong);
+    color: var(--blue-deep);
+    font-family: "Baloo 2", sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 8px 18px;
+    border-radius: 999px;
+    margin-bottom: 20px;
+  }
+
+  .hero-eyebrow-banner .dot {
+    width: 7px; height: 7px; border-radius: 999px; background: var(--orange);
+  }
+
+  .hero h1 {
+    font-size: clamp(2.4rem, 4.4vw, 3.6rem);
+    line-height: 1.06;
+    letter-spacing: -0.01em;
+    color: var(--navy);
+  }
+
+  .hero h1 .pop { color: var(--orange-deep); }
+
+  .hero p {
+    max-width: 46ch;
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+    margin-top: 20px;
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--orange);
+    color: #fff;
+    font-family: "Baloo 2", sans-serif;
+    font-weight: 700;
+    font-size: 1.08rem;
+    border: none;
+    border-radius: 999px;
+    padding: 16px 30px;
+    cursor: pointer;
+    box-shadow: var(--shadow-btn-orange);
+    transition: transform 0.12s ease;
+    text-decoration: none;
+  }
+
+  .hero-cta:hover { transform: translateY(-1px); }
+  .hero-cta:active { transform: translateY(4px); box-shadow: 0 2px 0 var(--orange-deep); }
+
+  .hero-secondary-link {
+    font-weight: 700;
+    font-size: 0.98rem;
+    color: var(--blue-deep);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .hero-secondary-link:hover { text-decoration: underline; }
+
+  .hero-art {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  .hero-art::before {
+    content: "";
+    position: absolute;
+    inset: 6%;
+    background: radial-gradient(circle, var(--orange-tint) 0%, transparent 70%);
+    border-radius: 50%;
+    z-index: 0;
+  }
+
+  .hero-art img {
+    width: 100%;
+    max-width: 380px;
+    position: relative;
+    z-index: 1;
+    filter: drop-shadow(0 24px 34px rgba(22,33,58,0.18));
+  }
+
+  /* feature strip */
+
+  .feature-strip {
+    padding: 8px 0 48px;
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .feature-item {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 22px 22px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .feature-item .icon {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--orange-tint);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+  }
+
+  .feature-item:nth-child(2) .icon { background: var(--blue-tint); }
+  .feature-item:nth-child(3) .icon { background: #fff3d6; }
+
+  .feature-item h3 { font-size: 1.02rem; margin-bottom: 4px; }
+  .feature-item p { margin: 0; font-size: 0.92rem; color: var(--ink-soft); }
+
+  /* ---------- Products ---------- */
+
+  .section-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .section-title { font-size: 1.9rem; margin-bottom: 6px; }
+  .section-sub { color: var(--ink-soft); margin: 0; max-width: 52ch; }
+
+  .products { padding: 20px 0 72px; }
+
+  .product-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 52px;
+  }
+
+  .section-heading-sm {
+    font-size: 1.4rem;
+    margin-bottom: 22px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line-strong);
+    color: var(--blue-deep);
+  }
+
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 26px;
+  }
+
+  .product-card {
+    background: var(--paper);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--line);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.16s ease, box-shadow 0.16s ease;
+  }
+
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 2px 0 rgba(22,33,58,0.04), 0 30px 48px -22px rgba(22,33,58,0.42);
+  }
+
+  .product-card .thumb {
+    aspect-ratio: 1 / 1;
+    border-radius: var(--radius-md);
+    background: linear-gradient(160deg, var(--cream-deep), var(--orange-tint));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-bottom: 16px;
+    position: relative;
+  }
+
+  .product-card .thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .product-card .thumb .placeholder-emoji { font-size: 3.2rem; }
+
+  .product-card h3 { font-size: 1.18rem; margin-bottom: 5px; letter-spacing: -0.01em; }
+
+  .product-card p.desc {
+    font-size: 0.93rem;
+    color: var(--ink-soft);
+    flex-grow: 1;
+    margin: 0 0 16px;
+  }
+
+  .product-card .price-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 14px;
+    border-top: 1px dashed var(--line-strong);
+  }
+
+  .price { font-family: "Baloo 2", sans-serif; font-weight: 700; font-size: 1.2rem; color: var(--orange-deep); }
+  .stock-note { font-size: 0.78rem; color: var(--ink-faint); margin-top: 2px; }
+
+  .add-btn {
+    background: var(--blue);
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    padding: 10px 20px;
+    font-family: "Baloo 2", sans-serif;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 0 var(--blue-deep);
+    transition: transform 0.1s ease;
+  }
+
+  .add-btn:hover { transform: translateY(-1px); }
+  .add-btn:active { transform: translateY(3px); box-shadow: none; }
+
+  .add-btn[disabled] {
+    background: #d7dce6;
+    box-shadow: none;
+    cursor: not-allowed;
+    color: var(--ink-faint);
+  }
+
+  .empty-state, .loading-state {
+    text-align: center;
+    padding: 70px 20px;
+    color: var(--ink-soft);
+    grid-column: 1 / -1;
+  }
+
+  /* ---------- Cart drawer ---------- */
+
+  .cart-overlay {
+    position: fixed; inset: 0;
+    background: rgba(16, 24, 43, 0.5);
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: 50;
+  }
+
+  .cart-overlay.open { opacity: 1; pointer-events: auto; }
+
+  .cart-drawer {
+    position: fixed; top: 0; right: 0; height: 100%;
+    width: min(420px, 92vw);
+    background: var(--cream);
+    z-index: 51;
+    transform: translateX(100%);
+    transition: transform 0.28s cubic-bezier(.4,0,.2,1);
+    display: flex; flex-direction: column;
+    box-shadow: -16px 0 40px rgba(16,24,43,0.18);
+  }
+
+  .cart-drawer.open { transform: translateX(0); }
+
+  .cart-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 22px 24px; border-bottom: 1px solid var(--line);
+  }
+
+  .cart-header h2 { font-size: 1.35rem; }
+
+  .cart-close {
+    background: var(--paper); border: 1px solid var(--line);
+    width: 36px; height: 36px; border-radius: 10px;
+    font-size: 1.3rem; line-height: 1; cursor: pointer; color: var(--navy);
+  }
+
+  .cart-items { flex-grow: 1; overflow-y: auto; padding: 8px 24px; }
+
+  .cart-item {
+    display: flex; align-items: center; gap: 14px;
+    padding: 16px 0; border-bottom: 1px solid var(--line);
+  }
+
+  .cart-item .thumb-sm {
+    width: 56px; height: 56px; border-radius: 14px;
+    background: var(--orange-tint);
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden; flex-shrink: 0;
+  }
+
+  .cart-item .thumb-sm img { width: 100%; height: 100%; object-fit: cover; }
+  .cart-item-info { flex-grow: 1; }
+  .cart-item-info .name { font-weight: 700; font-size: 0.96rem; }
+  .cart-item-info .unit-price { font-size: 0.82rem; color: var(--ink-faint); }
+
+  .qty-control { display: flex; align-items: center; gap: 10px; }
+
+  .qty-control button {
+    width: 28px; height: 28px; border-radius: 8px;
+    border: 1px solid var(--line-strong); background: var(--paper);
+    cursor: pointer; font-weight: 700; font-size: 1rem; line-height: 1;
+  }
+
+  .remove-item {
+    background: none; border: none; color: #c14e4e;
+    font-size: 0.8rem; cursor: pointer; margin-left: 4px;
+  }
+
+  .cart-footer { padding: 20px 24px 26px; border-top: 1px solid var(--line); }
+
+  .cart-total-row {
+    display: flex; justify-content: space-between;
+    font-family: "Baloo 2", sans-serif; font-weight: 700; font-size: 1.2rem;
+    margin-bottom: 16px;
+  }
+
+  .checkout-fields { display: flex; flex-direction: column; gap: 11px; margin-bottom: 16px; }
+
+  .checkout-fields input {
+    border: 1px solid var(--line-strong); border-radius: 12px;
+    padding: 11px 15px; font-family: inherit; font-size: 0.95rem;
+    background: var(--paper);
+  }
+
+  .checkout-fields input:focus { outline: none; border-color: var(--blue); }
+
+  .whatsapp-btn {
+    width: 100%; background: #25d366; color: #fff; border: none;
+    border-radius: 999px; padding: 15px;
+    font-family: "Baloo 2", sans-serif; font-weight: 700; font-size: 1.06rem;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    gap: 9px; box-shadow: 0 5px 0 #1ba851; transition: transform 0.1s ease;
+  }
+
+  .whatsapp-btn:hover { transform: translateY(-1px); }
+  .whatsapp-btn:active { transform: translateY(3px); box-shadow: none; }
+  .whatsapp-btn[disabled] { background: #d7dce6; box-shadow: none; cursor: not-allowed; }
+
+  .cart-empty-note { text-align: center; color: var(--ink-faint); padding: 50px 10px; }
+
+  /* ---------- Footer ---------- */
+
+  .site-footer { border-top: 1px solid var(--line); padding: 40px 0; margin-top: 20px; }
+
+  .footer-grid {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 20px; flex-wrap: wrap;
+  }
+
+  .footer-brand { display: flex; align-items: center; gap: 12px; }
+  .footer-brand img { height: 36px; }
+  .footer-brand span { font-family: "Baloo 2", sans-serif; font-weight: 700; color: var(--blue-deep); }
+
+  .footer-note { color: var(--ink-faint); font-size: 0.9rem; }
+  .footer-note a { color: var(--blue); text-decoration: none; font-weight: 700; }
+  .footer-note a:hover { text-decoration: underline; }
+
+  /* ---------- Responsive ---------- */
+
+  @media (max-width: 860px) {
+    .feature-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 760px) {
+    .hero .wrap { grid-template-columns: 1fr; text-align: center; }
+    .hero p { margin-left: auto; margin-right: auto; }
+    .hero-actions { justify-content: center; }
+    .hero-art { order: -1; }
+    .hero-art img { max-width: 240px; }
+    .header-links { display: none; }
+    .footer-grid { flex-direction: column; text-align: center; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; scroll-behavior: auto !important; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <img src="assets/logo.png" alt="Crissyy Crispy logo" />
+    </a>
+    <nav class="header-links">
+      <a href="#shop">Shop</a>
+      <a href="#about">About</a>
+    </nav>
+    <button class="cart-button" id="openCartBtn" aria-haspopup="dialog" aria-controls="cartDrawer">
+      Cart
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <span class="hero-eyebrow-banner"><span class="dot"></span> Imported snacks, delivered locally</span>
+      <h1>Crunchy, <span class="pop">imported</span>, ordered in a tap.</h1>
+      <p>Crissyy Crispy brings hard-to-find imported snacks to your door. Pick your favorites, and we'll confirm your order right on WhatsApp — no accounts, no forms.</p>
+      <div class="hero-actions">
+        <a class="hero-cta" href="#shop">Start shopping</a>
+        <a class="hero-secondary-link" href="#about">How ordering works →</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <img src="assets/logo.png" alt="Crissyy Crispy star mascot" />
+    </div>
+  </div>
+</section>
+
+<section class="feature-strip" id="about">
+  <div class="wrap">
+    <div class="feature-grid">
+      <div class="feature-item">
+        <div class="icon">🌍</div>
+        <div>
+          <h3>Genuinely imported</h3>
+          <p>Every snack on this shelf is sourced from abroad, not a local knockoff.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="icon">💬</div>
+        <div>
+          <h3>WhatsApp checkout</h3>
+          <p>Add to cart, tap checkout, and your order lands in our WhatsApp — instantly.</p>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="icon">📦</div>
+        <div>
+          <h3>Restocked often</h3>
+          <p>New flavors and fresh batches are added regularly, so check back often.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="products" id="shop">
+  <div class="wrap">
+    <div class="section-heading">
+      <div>
+        <h2 class="section-title">This week's snacks</h2>
+        <p class="section-sub">Everything below is imported and in stock — add what you like to your cart.</p>
+      </div>
+    </div>
+    <div id="productGrid" class="product-sections">
+      <div class="loading-state">Loading snacks…</div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <img src="assets/logo.png" alt="Crissyy Crispy logo" />
+      <span>Crissyy Crispy</span>
+    </div>
+    <div class="footer-note">
+      Orders are confirmed on <a href="https://wa.me" target="_blank" rel="noopener">WhatsApp</a>.
+    </div>
+  </div>
+</footer>
+
+<div class="cart-overlay" id="cartOverlay"></div>
+<aside class="cart-drawer" id="cartDrawer" role="dialog" aria-label="Your cart">
+  <div class="cart-header">
+    <h2>Your cart</h2>
+    <button class="cart-close" id="closeCartBtn" aria-label="Close cart">&times;</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <p class="cart-empty-note">Your cart is empty. Add a snack to get started.</p>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none;">
+    <div class="cart-total-row">
+      <span>Total</span>
+      <span id="cartTotal">₦0</span>
+    </div>
+    <div class="checkout-fields">
+      <input type="text" id="customerName" placeholder="Your name" required />
+      <input type="tel" id="customerPhone" placeholder="Your phone number" required />
+      <input type="text" id="customerAddress" placeholder="Delivery address" required />
+    </div>
+    <button class="whatsapp-btn" id="checkoutBtn">Send order on WhatsApp</button>
+  </div>
+</aside>
+
+<script src="js/config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

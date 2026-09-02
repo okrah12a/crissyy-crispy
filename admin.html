@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Crissyy Crispy — Admin</title>
+<meta name="robots" content="noindex" />
+<link rel="icon" href="assets/logo.png" />
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/admin.css" />
+</head>
+<body>
+
+<div class="admin-header">
+  <img src="assets/logo.png" alt="Crissyy Crispy logo" />
+  <h1>Admin</h1>
+</div>
+
+<div class="wrap">
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="products">Products</button>
+    <button class="tab-btn" data-tab="orders">Orders</button>
+  </div>
+
+  <div class="tab-panel active" id="tab-products">
+
+    <div class="card">
+      <h3 style="margin-bottom:12px;">Sections</h3>
+      <p class="muted" style="margin-top:-6px; margin-bottom:12px;">
+        Sections group snacks on the storefront (e.g. "Chips", "Chocolates", "Drinks").
+      </p>
+      <div class="new-section-form">
+        <input type="text" id="newSectionName" placeholder="New section name" />
+        <button class="btn btn-add" id="addSectionBtn">Add section</button>
+      </div>
+      <div id="sectionList" class="section-list">
+        <span class="muted">Loading sections…</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-bottom:12px;">Add a product</h3>
+      <div class="new-product-form">
+        <div class="field">
+          <label>Name</label>
+          <input type="text" id="newName" placeholder="Crunch Bites Original" />
+        </div>
+        <div class="field">
+          <label>Section</label>
+          <select id="newCategory">
+            <option value="">No section</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Price (₦)</label>
+          <input type="number" id="newPrice" placeholder="1500" min="0" />
+        </div>
+        <div class="field">
+          <label>Stock qty</label>
+          <input type="number" id="newQty" placeholder="20" min="0" />
+        </div>
+      </div>
+      <div class="new-product-form" style="margin-top:12px;">
+        <div class="field" style="grid-column: span 2;">
+          <label>Description</label>
+          <input type="text" id="newDesc" placeholder="Short description shown on the storefront" />
+        </div>
+        <div class="field">
+          <label>Photo</label>
+          <input type="file" id="newImageFile" accept="image/*" />
+        </div>
+        <button class="btn btn-add" id="addProductBtn">Add product</button>
+      </div>
+      <p class="save-hint" id="uploadStatus"></p>
+    </div>
+
+    <table id="productsTable">
+      <thead>
+        <tr>
+          <th>Photo</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Section</th>
+          <th>Price (₦)</th>
+          <th>Stock</th>
+          <th>Active</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="productsBody">
+        <tr><td colspan="8" class="muted">Loading products…</td></tr>
+      </tbody>
+    </table>
+    <p class="save-hint">Edit any field (and swap the photo if needed), then click Save on that row.</p>
+  </div>
+
+  <div class="tab-panel" id="tab-orders">
+    <table id="ordersTable">
+      <thead>
+        <tr>
+          <th>Ref</th>
+          <th>Item</th>
+          <th>Qty</th>
+          <th>Customer</th>
+          <th>Phone</th>
+          <th>Address</th>
+          <th>Status</th>
+          <th>Placed</th>
+        </tr>
+      </thead>
+      <tbody id="ordersBody">
+        <tr><td colspan="8" class="muted">Loading orders…</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase-client.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>
