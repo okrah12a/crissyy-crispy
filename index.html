@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Crissyy Crispy — Imported Snacks</title>
-<meta name="description" content="Crissyy Crispy — imported snacks, ordered straight to WhatsApp." />
+<title>Crissyy Crispy Imported Snacks</title>
+<meta name="description" content="Crissyy Crispy imported snacks, ordered straight to WhatsApp." />
 <link rel="icon" href="assets/logo.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -314,7 +314,43 @@
   .product-sections {
     display: flex;
     flex-direction: column;
-    gap: 52px;
+    gap: 28px;
+  }
+
+  .section-tabs {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    scrollbar-width: thin;
+  }
+
+  .section-tabs::-webkit-scrollbar { height: 5px; }
+  .section-tabs::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 999px; }
+
+  .tab-btn {
+    flex-shrink: 0;
+    background: var(--paper);
+    border: 1px solid var(--line-strong);
+    color: var(--ink-soft);
+    font-family: "Baloo 2", sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    padding: 10px 20px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    white-space: nowrap;
+  }
+
+  .tab-btn:hover { border-color: var(--orange); color: var(--orange-deep); }
+
+  .tab-btn.active {
+    background: var(--orange);
+    border-color: var(--orange);
+    color: #fff;
   }
 
   .section-heading-sm {
@@ -575,7 +611,7 @@
     <div>
       <span class="hero-eyebrow-banner"><span class="dot"></span> Imported snacks, delivered locally</span>
       <h1>Crunchy, <span class="pop">imported</span>, ordered in a tap.</h1>
-      <p>Crissyy Crispy brings hard-to-find imported snacks to your door. Pick your favorites, and we'll confirm your order right on WhatsApp — no accounts, no forms.</p>
+      <p>Crissyy Crispy, your go to spot for delicious imported snacks from around the world. From popular favorites to unique treats, we’ve got something for every craving.</p>
       <div class="hero-actions">
         <a class="hero-cta" href="#shop">Start shopping</a>
         <a class="hero-secondary-link" href="#about">How ordering works →</a>
@@ -600,8 +636,8 @@
       <div class="feature-item">
         <div class="icon">💬</div>
         <div>
-          <h3>WhatsApp checkout</h3>
-          <p>Add to cart, tap checkout, and your order lands in our WhatsApp — instantly.</p>
+          <h3>Quick, simple checkout</h3>
+          <p>Add your snacks to cart and place your order in a few taps, no accounts or long forms required.</p>
         </div>
       </div>
       <div class="feature-item">
@@ -620,9 +656,10 @@
     <div class="section-heading">
       <div>
         <h2 class="section-title">This week's snacks</h2>
-        <p class="section-sub">Everything below is imported and in stock — add what you like to your cart.</p>
+        <p class="section-sub">Everything below is imported and in stock, add what you like to your cart.</p>
       </div>
     </div>
+    <div id="sectionTabs" class="section-tabs"></div>
     <div id="productGrid" class="product-sections">
       <div class="loading-state">Loading snacks…</div>
     </div>

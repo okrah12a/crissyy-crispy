@@ -6,6 +6,8 @@ let categories = [];
 let cart = {}; // { productId: quantity }
 
 const productGrid = document.getElementById("productGrid");
+const sectionTabsEl = document.getElementById("sectionTabs");
+let activeSectionId = null; // null/"__unsectioned__" are valid values too
 const cartItemsEl = document.getElementById("cartItems");
 const cartFooterEl = document.getElementById("cartFooter");
 const cartTotalEl = document.getElementById("cartTotal");
@@ -73,45 +75,58 @@ function productCardHtml(p) {
 
 function renderProducts() {
   if (!products.length) {
+    sectionTabsEl.innerHTML = "";
     productGrid.innerHTML = `<div class="empty-state">No snacks available right now — check back soon!</div>`;
     return;
   }
 
   // Group products by section (category). Products with no section land
-  // in a trailing "More snacks" group, only shown if any exist.
-  const grouped = categories.map((c) => ({
-    id: c.id,
-    name: c.name,
-    items: products.filter((p) => p.category_id === c.id),
-  }));
+  // in a trailing "More snacks" tab, only shown if any exist.
+  const grouped = categories
+    .map((c) => ({
+      id: c.id,
+      name: c.name,
+      items: products.filter((p) => p.category_id === c.id),
+    }))
+    .filter((g) => g.items.length);
+
   const unsectioned = products.filter((p) => !p.category_id);
+  if (unsectioned.length) {
+    grouped.push({ id: "__unsectioned__", name: "More snacks", items: unsectioned });
+  }
 
-  const sectionsHtml = grouped
-    .filter((g) => g.items.length)
-    .map(
-      (g) => `
-        <div class="product-section">
-          <h3 class="section-heading-sm">${g.name}</h3>
-          <div class="product-grid">
-            ${g.items.map(productCardHtml).join("")}
-          </div>
-        </div>
-      `
-    )
-    .join("");
+  // Keep the currently active tab selected if it still has items,
+  // otherwise fall back to the first available section.
+  if (!grouped.some((g) => g.id === activeSectionId)) {
+    activeSectionId = grouped.length ? grouped[0].id : null;
+  }
 
-  const unsectionedHtml = unsectioned.length
-    ? `
-      <div class="product-section">
-        ${grouped.some((g) => g.items.length) ? `<h3 class="section-heading-sm">More snacks</h3>` : ""}
-        <div class="product-grid">
-          ${unsectioned.map(productCardHtml).join("")}
-        </div>
-      </div>
-    `
-    : "";
+  // Only show a tab bar when there's more than one section to switch between.
+  sectionTabsEl.innerHTML =
+    grouped.length > 1
+      ? grouped
+          .map(
+            (g) => `
+              <button class="tab-btn${g.id === activeSectionId ? " active" : ""}" data-section-id="${g.id}">
+                ${g.name}
+              </button>
+            `
+          )
+          .join("")
+      : "";
 
-  productGrid.innerHTML = sectionsHtml + unsectionedHtml;
+  sectionTabsEl.querySelectorAll(".tab-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      activeSectionId = btn.dataset.sectionId;
+      renderProducts();
+    });
+  });
+
+  const activeGroup = grouped.find((g) => g.id === activeSectionId);
+
+  productGrid.innerHTML = activeGroup
+    ? `<div class="product-grid">${activeGroup.items.map(productCardHtml).join("")}</div>`
+    : `<div class="empty-state">No snacks available right now — check back soon!</div>`;
 
   productGrid.querySelectorAll(".add-btn").forEach((btn) => {
     btn.addEventListener("click", () => addToCart(btn.dataset.id));
@@ -125,7 +140,6 @@ function addToCart(productId) {
   if (currentQty + 1 > product.quantity) return; // don't exceed stock
   cart[productId] = currentQty + 1;
   renderCart();
-  openCart();
 }
 
 function changeQty(productId, delta) {
