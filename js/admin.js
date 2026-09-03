@@ -1,5 +1,11 @@
 const sb = window.supabaseClient;
+const CONFIG = window.CRISSYY_CONFIG || {};
+const CURRENCY_SYMBOL = CONFIG.CURRENCY_SYMBOL || "₦";
 const STORAGE_BUCKET = "product-images";
+
+function formatPrice(amount) {
+  return `${CURRENCY_SYMBOL}${Number(amount || 0).toLocaleString()}`;
+}
 
 document.querySelectorAll(".tab-btn").forEach((btn) => {
   btn.addEventListener("click", () => {
@@ -7,7 +13,7 @@ document.querySelectorAll(".tab-btn").forEach((btn) => {
     document.querySelectorAll(".tab-panel").forEach((p) => p.classList.remove("active"));
     btn.classList.add("active");
     document.getElementById(`tab-${btn.dataset.tab}`).classList.add("active");
-    if (btn.dataset.tab === "orders") loadOrders();
+    if (btn.dataset.tab === "orders") loadOrders(document.getElementById("orderMonthFilter").value);
   });
 });
 
@@ -279,22 +285,48 @@ document.getElementById("addProductBtn").addEventListener("click", async () => {
 
 // ---------- Orders ----------
 
-async function loadOrders() {
+function currentMonthValue() {
+  const now = new Date();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  return `${now.getFullYear()}-${month}`;
+}
+
+function monthRange(monthValue) {
+  const [year, month] = monthValue.split("-").map(Number);
+  const start = new Date(year, month - 1, 1);
+  const end = new Date(year, month, 1);
+  return { start: start.toISOString(), end: end.toISOString() };
+}
+
+const orderMonthFilterEl = document.getElementById("orderMonthFilter");
+orderMonthFilterEl.value = currentMonthValue();
+orderMonthFilterEl.addEventListener("change", () => {
+  loadOrders(orderMonthFilterEl.value || currentMonthValue());
+});
+
+async function loadOrders(monthValue) {
+  const month = monthValue || currentMonthValue();
   const body = document.getElementById("ordersBody");
-  body.innerHTML = `<tr><td colspan="8" class="muted">Loading orders…</td></tr>`;
+  const totalEl = document.getElementById("ordersTotal");
+  body.innerHTML = `<tr><td colspan="9" class="muted">Loading orders…</td></tr>`;
+  totalEl.textContent = formatPrice(0);
+
+  const { start, end } = monthRange(month);
 
   const { data, error } = await sb
     .from("orders")
-    .select("*, products(name)")
+    .select("*, products(name, price)")
+    .gte("created_at", start)
+    .lt("created_at", end)
     .order("created_at", { ascending: false });
 
   if (error) {
-    body.innerHTML = `<tr><td colspan="8" class="muted">Couldn't load orders: ${error.message}</td></tr>`;
+    body.innerHTML = `<tr><td colspan="9" class="muted">Couldn't load orders: ${error.message}</td></tr>`;
     return;
   }
 
   if (!data.length) {
-    body.innerHTML = `<tr><td colspan="8" class="muted">No orders yet.</td></tr>`;
+    body.innerHTML = `<tr><td colspan="9" class="muted">No orders for this month yet.</td></tr>`;
     return;
   }
 
@@ -302,11 +334,14 @@ async function loadOrders() {
     .map((o) => {
       const placed = new Date(o.created_at).toLocaleString();
       const itemName = o.products ? o.products.name : "(deleted product)";
+      const unitPrice = o.products ? Number(o.products.price) : 0;
+      const amount = unitPrice * Number(o.quantity || 0);
       return `
-        <tr data-id="${o.id}">
+        <tr data-id="${o.id}" data-amount="${amount}">
           <td>${o.whatsapp_order_ref || o.id.slice(0, 8)}</td>
           <td>${itemName}</td>
           <td>${o.quantity}</td>
+          <td>${formatPrice(amount)}</td>
           <td>${o.customer_name || ""}</td>
           <td>${o.customer_phone || ""}</td>
           <td>${o.delivery_address || ""}</td>
@@ -323,6 +358,8 @@ async function loadOrders() {
     })
     .join("");
 
+  recomputeOrdersTotal();
+
   body.querySelectorAll(".f-status").forEach((select) => {
     select.addEventListener("change", async () => {
       const row = select.closest("tr");
@@ -330,10 +367,26 @@ async function loadOrders() {
         .from("orders")
         .update({ status: select.value })
         .eq("id", row.dataset.id);
-      if (error) alert(`Couldn't update status: ${error.message}`);
-      else flashRow(row);
+      if (error) {
+        alert(`Couldn't update status: ${error.message}`);
+        return;
+      }
+      flashRow(row);
+      recomputeOrdersTotal();
     });
   });
+}
+
+function recomputeOrdersTotal() {
+  const totalEl = document.getElementById("ordersTotal");
+  let total = 0;
+  document.querySelectorAll("#ordersBody tr[data-id]").forEach((row) => {
+    const statusSelect = row.querySelector(".f-status");
+    if (statusSelect && statusSelect.value === "fulfilled") {
+      total += Number(row.dataset.amount || 0);
+    }
+  });
+  totalEl.textContent = formatPrice(total);
 }
 
 loadCategories();

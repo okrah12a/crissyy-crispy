@@ -97,6 +97,16 @@
   </div>
 
   <div class="tab-panel" id="tab-orders">
+    <div class="orders-toolbar">
+      <div class="field">
+        <label>Month</label>
+        <input type="month" id="orderMonthFilter" />
+      </div>
+      <div class="orders-total">
+        <span>Total goods sold this month (fulfilled orders)</span>
+        <strong id="ordersTotal">₦0</strong>
+      </div>
+    </div>
     <div class="table-scroll">
       <table id="ordersTable">
         <thead>
@@ -104,6 +114,7 @@
             <th>Ref</th>
             <th>Item</th>
             <th>Qty</th>
+            <th>Amount</th>
             <th>Customer</th>
             <th>Phone</th>
             <th>Address</th>
@@ -112,7 +123,7 @@
           </tr>
         </thead>
         <tbody id="ordersBody">
-          <tr><td colspan="8" class="muted">Loading orders…</td></tr>
+          <tr><td colspan="9" class="muted">Loading orders…</td></tr>
         </tbody>
       </table>
     </div>
