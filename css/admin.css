@@ -91,11 +91,24 @@ h1, h2, h3 { font-family: "Baloo 2", sans-serif; font-weight: 700; margin: 0; }
 
 table {
   width: 100%;
+  min-width: 680px;
   border-collapse: collapse;
   background: #fff;
   border-radius: 16px;
   overflow: hidden;
+}
+
+.table-scroll {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 16px;
   border: 2px solid var(--line);
+}
+
+.table-scroll table {
+  border: none;
+  border-radius: 0;
 }
 
 thead { background: var(--cream); }
@@ -243,4 +256,9 @@ td.image-cell input[type="file"] { font-size: 0.75rem; max-width: 110px; }
   padding: 7px 8px;
   font-size: 0.82rem;
   background: var(--cream);
+}
+
+@media (max-width: 600px) {
+  .wrap { padding: 18px 14px; }
+  .admin-header { padding: 14px 18px; }
 }

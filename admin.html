@@ -74,44 +74,48 @@
       <p class="save-hint" id="uploadStatus"></p>
     </div>
 
-    <table id="productsTable">
-      <thead>
-        <tr>
-          <th>Photo</th>
-          <th>Name</th>
-          <th>Description</th>
-          <th>Section</th>
-          <th>Price (₦)</th>
-          <th>Stock</th>
-          <th>Active</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody id="productsBody">
-        <tr><td colspan="8" class="muted">Loading products…</td></tr>
-      </tbody>
-    </table>
+    <div class="table-scroll">
+      <table id="productsTable">
+        <thead>
+          <tr>
+            <th>Photo</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Section</th>
+            <th>Price (₦)</th>
+            <th>Stock</th>
+            <th>Active</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="productsBody">
+          <tr><td colspan="8" class="muted">Loading products…</td></tr>
+        </tbody>
+      </table>
+    </div>
     <p class="save-hint">Edit any field (and swap the photo if needed), then click Save on that row.</p>
   </div>
 
   <div class="tab-panel" id="tab-orders">
-    <table id="ordersTable">
-      <thead>
-        <tr>
-          <th>Ref</th>
-          <th>Item</th>
-          <th>Qty</th>
-          <th>Customer</th>
-          <th>Phone</th>
-          <th>Address</th>
-          <th>Status</th>
-          <th>Placed</th>
-        </tr>
-      </thead>
-      <tbody id="ordersBody">
-        <tr><td colspan="8" class="muted">Loading orders…</td></tr>
-      </tbody>
-    </table>
+    <div class="table-scroll">
+      <table id="ordersTable">
+        <thead>
+          <tr>
+            <th>Ref</th>
+            <th>Item</th>
+            <th>Qty</th>
+            <th>Customer</th>
+            <th>Phone</th>
+            <th>Address</th>
+            <th>Status</th>
+            <th>Placed</th>
+          </tr>
+        </thead>
+        <tbody id="ordersBody">
+          <tr><td colspan="8" class="muted">Loading orders…</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 
